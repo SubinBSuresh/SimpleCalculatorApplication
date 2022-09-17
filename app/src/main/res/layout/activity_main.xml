@@ -61,7 +61,7 @@
             android:layout_margin="2sp"
             android:layout_weight="1"
             android:backgroundTint="@color/grey"
-            android:onClick="onDigitClick"
+            android:onClick="onOperatorButtonClick"
             android:text="@string/_divide" />
     </LinearLayout>
 
@@ -109,7 +109,7 @@
             android:layout_margin="2sp"
             android:layout_weight="1"
             android:backgroundTint="@color/grey"
-            android:onClick="onDigitClick"
+            android:onClick="onOperatorButtonClick"
             android:text="@string/_multiply" />
 
     </LinearLayout>
@@ -158,7 +158,7 @@
             android:layout_margin="2sp"
             android:layout_weight="1"
             android:backgroundTint="@color/grey"
-            android:onClick="onDigitClick"
+            android:onClick="onOperatorButtonClick"
             android:text="@string/_minus" />
     </LinearLayout>
 
@@ -195,7 +195,7 @@
             android:layout_margin="2sp"
             android:layout_weight="1"
             android:backgroundTint="@color/grey"
-            android:onClick="onDigitClick"
+            android:onClick="onOperatorButtonClick"
             android:text="+" />
     </LinearLayout>
 
@@ -207,12 +207,23 @@
 
         <Button
             android:id="@+id/btnEquals"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="2sp"
+            android:layout_weight="3"
             android:backgroundTint="@color/grey"
-            android:onClick="onDigitClick"
+            android:onClick="onEqualButtonClick"
             android:text="=" />
+
+        <Button
+            android:id="@+id/btnPoint"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_margin="2sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/grey"
+            android:onClick="onDotButtonClick"
+            android:text="." />
     </LinearLayout>
 
 </LinearLayout>

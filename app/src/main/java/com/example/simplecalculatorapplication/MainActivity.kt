@@ -1,14 +1,18 @@
 package com.example.simplecalculatorapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    private var tvTextInput: TextView ?= null
+
+    private var tvTextInput: TextView? = null
+    private var lastNumeric: Boolean = false
+    private var lastDot: Boolean = false
+    private var operatorClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,14 +22,52 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Method for handling digit clicks
-    fun onDigitClick(view: View){
-//        Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show()
+    fun onDigitClick(view: View) {
         tvTextInput?.append((view as Button).text)
+        lastNumeric = true
+        lastDot = false
     }
 
-    // Method for handling clear button click
-    fun onClearButtonClick(view: View){
+    // Method for handling clear button clicks
+    fun onClearButtonClick(view: View) {
         tvTextInput?.text = ""
+    }
 
+    // Method for handling decimal point button clicks
+    fun onDotButtonClick(view: View) {
+        if (lastNumeric && !lastDot) {
+            tvTextInput?.append(".")
+            lastNumeric = false
+            lastDot = true
+        }
+    }
+
+    // Method for handling operator button clicks
+    fun onOperatorButtonClick(view: View) {
+        operatorClicked = true
+
+        tvTextInput?.text?.let {
+            if (lastNumeric && !isOperatorAdded(it.toString())){
+                tvTextInput?.append((view as Button).text)
+                lastNumeric = false
+                lastDot = false
+            }
+        }
+    }
+
+    // Method for handling equal button click
+    fun onEqualButtonClick(view: View) {
+
+    }
+
+    private fun isOperatorAdded(value: String): Boolean {
+        return if (value.startsWith("-")) {
+            false
+        } else {
+            value.contains("/")
+                    || value.contains("*")
+                    || value.contains("-")
+                    || value.contains("+")
+        }
     }
 }
