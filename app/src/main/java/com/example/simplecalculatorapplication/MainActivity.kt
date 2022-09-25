@@ -81,6 +81,48 @@ class MainActivity : AppCompatActivity() {
 
                         tvTextInput?.text = result.toString()
 
+                    } else if (tvValue.contains("+")) {
+                        var splitValue = tvValue.split("+")
+
+                        var firstElement = splitValue.get(0)
+                        var secondElement = splitValue.get(1)
+
+                        if (prefix.isNotEmpty()) {
+                            firstElement = prefix + firstElement
+                        }
+
+                        var result = firstElement.toFloat() + secondElement.toFloat()
+
+                        tvTextInput?.text = result.toString()
+
+                    } else if (tvValue.contains("/")) {
+                        var splitValue = tvValue.split("/")
+
+                        var firstElement = splitValue.get(0)
+                        var secondElement = splitValue.get(1)
+
+                        if (prefix.isNotEmpty()) {
+                            firstElement = prefix + firstElement
+                        }
+
+                        var result = firstElement.toFloat() / secondElement.toFloat()
+
+                        tvTextInput?.text = result.toString()
+
+                    }else if (tvValue.contains("*")) {
+                        var splitValue = tvValue.split("*")
+
+                        var firstElement = splitValue.get(0)
+                        var secondElement = splitValue.get(1)
+
+                        if (prefix.isNotEmpty()) {
+                            firstElement = prefix + firstElement
+                        }
+
+                        var result = firstElement.toFloat() * secondElement.toFloat()
+
+                        tvTextInput?.text = result.toString()
+
                     }
                 }
 
@@ -89,6 +131,14 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun removeZeroAfterDot(result: String) : String{
+        var value = result
+        if (result.contains(".0")){
+            value = result.substring(0,result.length-2)
+        }
+        return value
     }
 
     private fun isOperatorAdded(value: String): Boolean {
