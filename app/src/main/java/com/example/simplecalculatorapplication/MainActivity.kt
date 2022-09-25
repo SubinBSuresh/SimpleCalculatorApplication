@@ -1,7 +1,6 @@
 package com.example.simplecalculatorapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         operatorClicked = true
 
         tvTextInput?.text?.let {
-            if (lastNumeric && !isOperatorAdded(it.toString())){
+            if (lastNumeric && !isOperatorAdded(it.toString())) {
                 tvTextInput?.append((view as Button).text)
                 lastNumeric = false
                 lastDot = false
@@ -57,7 +56,39 @@ class MainActivity : AppCompatActivity() {
 
     // Method for handling equal button click
     fun onEqualButtonClick(view: View) {
+        if (lastNumeric) {
+            var tvValue = tvTextInput?.toString()
+            var prefix = ""
 
+            try {
+                if (tvValue != null) {
+                    if (tvValue.startsWith("-")) {
+                        prefix = "-"
+                        tvValue = tvValue.substring(1)
+                    }
+
+                    if (tvValue.contains("-")) {
+                        var splitValue = tvValue.split("-")
+
+                        var firstElement = splitValue.get(0)
+                        var secondElement = splitValue.get(1)
+
+                        if (prefix.isNotEmpty()) {
+                            firstElement = prefix + firstElement
+                        }
+
+                        var result = firstElement.toFloat() - secondElement.toFloat()
+
+                        tvTextInput?.text = result.toString()
+
+                    }
+                }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun isOperatorAdded(value: String): Boolean {
